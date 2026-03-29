@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>D8 Bark | Chef-Driven Date Bark from Abu Dhabi</title>
+  <meta name="description" content="Locally made date bark from Abu Dhabi. Custom gifting, catering, healthy snacking, and made-to-order date bark across the UAE." />
+  <meta name="theme-color" content="#4A2D24" />
+  <meta property="og:title" content="D8 Bark | Chef-Driven Date Bark from Abu Dhabi" />
+  <meta property="og:description" content="Locally made, locally sourced, chef-driven date bark for gifting, catering, and custom orders across the UAE." />
+  <meta property="og:type" content="website" />
+  <style>
+    :root{
+      --bg:#f8f4ef;
+      --card:#fffdf9;
+      --ink:#241713;
+      --muted:#6e5b52;
+      --brand:#4a2d24;
+      --brand-2:#8a5a3b;
+      --accent:#d4a76a;
+      --line:rgba(74,45,36,.12);
+      --shadow:0 18px 45px rgba(48,28,20,.10);
+      --radius:22px;
+      --max:1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(212,167,106,.20), transparent 28%),
+        linear-gradient(180deg,#fbf8f3 0%, #f8f4ef 38%, #f3ece4 100%);
+      color:var(--ink);
+      line-height:1.6;
+    }
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+    .container{width:min(calc(100% - 32px), var(--max)); margin:0 auto}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      border:1px solid var(--line); padding:10px 14px; border-radius:999px;
+      background:rgba(255,255,255,.6); backdrop-filter: blur(10px);
+      color:var(--brand); font-weight:600; font-size:14px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:14px 20px; border-radius:999px; font-weight:700;
+      transition:transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+      border:none; cursor:pointer;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{
+      background:linear-gradient(135deg,var(--brand),#2c1b15);
+      color:#fff; box-shadow:0 12px 28px rgba(74,45,36,.25);
+    }
+    .btn-secondary{
+      background:#fff; color:var(--brand); border:1px solid var(--line);
+      box-shadow:var(--shadow);
+    }
+    .site-header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(12px);
+      background:rgba(248,244,239,.78);
+      border-bottom:1px solid rgba(74,45,36,.08);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between; gap:20px;
+      min-height:74px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.02em;
+      color:var(--brand);
+    }
+    .brand-mark{
+      width:40px; height:40px; border-radius:14px;
+      background:linear-gradient(145deg,var(--brand),#7b503c);
+      color:#fff; display:grid; place-items:center; font-weight:900;
+      box-shadow:0 10px 20px rgba(74,45,36,.22);
+    }
+    .nav-links{display:flex; align-items:center; gap:22px; color:var(--muted); font-weight:600}
+    .nav-links a:hover{color:var(--brand)}
+    .nav-cta{display:flex; gap:10px; align-items:center}
+    .mobile-hide{display:block}
+    .hero{
+      padding:72px 0 44px;
+    }
+    .hero-grid{
+      display:grid; grid-template-columns:1.08fr .92fr; gap:34px; align-items:center;
+    }
+    .hero-copy h1{
+      font-family: Georgia, "Times New Roman", serif;
+      font-size:clamp(2.6rem, 6vw, 5rem);
+      line-height:1.03; margin:16px 0 18px; color:var(--brand);
+      letter-spacing:-.03em;
+    }
+    .hero-copy p{
+      font-size:1.1rem; color:var(--muted); max-width:700px;
+    }
+    .hero-actions{display:flex; flex-wrap:wrap; gap:14px; margin-top:26px}
+    .hero-stats{
+      display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:28px;
+    }
+    .stat{
+      background:rgba(255,255,255,.72);
+      border:1px solid var(--line); border-radius:18px; padding:16px;
+      box-shadow:var(--shadow);
+    }
+    .stat strong{display:block; font-size:1.3rem; color:var(--brand)}
+    .stat span{font-size:.95rem; color:var(--muted)}
+    .hero-card{
+      background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,249,242,.95));
+      border:1px solid var(--line); border-radius:30px; padding:24px;
+      box-shadow:var(--shadow);
+      position:relative; overflow:hidden;
+    }
+    .hero-card:before{
+      content:"";
+      position:absolute; inset:auto -40px -40px auto; width:180px; height:180px;
+      background:radial-gradient(circle, rgba(212,167,106,.26), transparent 68%);
+    }
+    .mock{
+      display:grid; gap:14px;
+    }
+    .mock-top{
+      border-radius:22px; padding:20px;
+      min-height:220px;
+      background:
+        linear-gradient(150deg, rgba(74,45,36,.92), rgba(138,90,59,.88)),
+        linear-gradient(45deg,#8c6b55,#3b271f);
+      color:#fff; position:relative; overflow:hidden;
+    }
+    .mock-top:after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(circle at 20% 25%, rgba(255,255,255,.18), transparent 20%),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,.16), transparent 16%),
+        radial-gradient(circle at 78% 80%, rgba(212,167,106,.26), transparent 20%);
+      pointer-events:none;
+    }
+    .mock-badge{
+      display:inline-block; padding:8px 12px; border-radius:999px;
+      background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.18);
+      font-size:13px; font-weight:700; letter-spacing:.03em;
+      position:relative; z-index:1;
+    }
+    .mock-title{
+      position:relative; z-index:1;
+      font-family:Georgia, serif; font-size:2rem; line-height:1.06; margin:16px 0 10px;
+    }
+    .mock-top p{position:relative; z-index:1; max-width:420px; color:rgba(255,255,255,.88)}
+    .mini-grid{
+      display:grid; grid-template-columns:repeat(2,1fr); gap:14px;
+    }
+    .mini-card{
+      background:var(--card); border:1px solid var(--line);
+      border-radius:18px; padding:18px; min-height:124px;
+    }
+    .mini-card h4{margin:0 0 8px; color:var(--brand)}
+    .mini-card p{margin:0; color:var(--muted); font-size:.95rem}
+    section{padding:40px 0}
+    .section-head{
+      display:flex; justify-content:space-between; align-items:end; gap:16px; margin-bottom:22px;
+    }
+    .section-head h2{
+      font-family:Georgia, serif; font-size:clamp(2rem,4vw,3rem); line-height:1.05;
+      color:var(--brand); margin:0;
+    }
+    .section-head p{max-width:650px; margin:0; color:var(--muted)}
+    .card-grid{
+      display:grid; grid-template-columns:repeat(3,1fr); gap:18px;
+    }
+    .feature, .product, .use-case, .faq, .story, .inquiry-card, .banner{
+      background:rgba(255,255,255,.78); border:1px solid var(--line);
+      border-radius:24px; box-shadow:var(--shadow);
+    }
+    .feature{padding:22px}
+    .icon{
+      width:46px; height:46px; border-radius:14px;
+      display:grid; place-items:center; font-size:1.15rem; margin-bottom:14px;
+      background:linear-gradient(145deg,#f2dfc2,#fff6ea);
+      border:1px solid rgba(138,90,59,.14);
+    }
+    h3{margin:0 0 8px; color:var(--brand)}
+    .feature p,.product p,.use-case p,.story p,.faq p,.banner p{margin:0; color:var(--muted)}
+    .products{
+      display:grid; grid-template-columns:repeat(2,1fr); gap:18px;
+    }
+    .product{padding:22px; position:relative; overflow:hidden}
+    .product small{
+      display:inline-flex; margin-bottom:10px; font-weight:700; color:var(--brand-2);
+      background:#fff3e3; border:1px solid rgba(212,167,106,.25);
+      padding:8px 12px; border-radius:999px;
+    }
+    .product ul{
+      margin:14px 0 0; padding-left:18px; color:var(--muted)
+    }
+    .story-wrap{
+      display:grid; grid-template-columns:1fr 1fr; gap:18px;
+    }
+    .story{padding:24px}
+    .use-cases{
+      display:grid; grid-template-columns:repeat(4,1fr); gap:16px;
+    }
+    .use-case{padding:20px}
+    .delivery{
+      display:grid; grid-template-columns:1.05fr .95fr; gap:18px; align-items:stretch;
+    }
+    .banner{padding:24px}
+    .delivery-list{
+      display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:18px;
+    }
+    .delivery-item{
+      padding:14px 16px; border-radius:16px; background:#fff7ec; color:var(--brand);
+      border:1px solid rgba(212,167,106,.24); font-weight:700;
+    }
+    .inquiry-wrap{
+      display:grid; grid-template-columns:1.1fr .9fr; gap:18px;
+    }
+    .inquiry-card{padding:24px}
+    .contact-list{
+      display:grid; gap:12px; margin-top:16px;
+    }
+    .contact-item{
+      padding:16px 18px; border-radius:18px; border:1px solid var(--line); background:#fff;
+    }
+    .contact-item strong{display:block; color:var(--brand)}
+    form{
+      display:grid; gap:12px; margin-top:16px;
+    }
+    .row-2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    input, select, textarea{
+      width:100%; padding:14px 16px; border-radius:16px;
+      border:1px solid rgba(74,45,36,.14); background:#fff; color:var(--ink);
+      font:inherit;
+    }
+    textarea{min-height:120px; resize:vertical}
+    .form-note{font-size:.9rem; color:var(--muted); margin-top:12px}
+    .faq-list{display:grid; gap:14px}
+    .faq{padding:20px}
+    .footer{
+      padding:40px 0 60px; color:var(--muted);
+    }
+    .footer-inner{
+      display:flex; justify-content:space-between; gap:20px; align-items:flex-start;
+      padding-top:28px; border-top:1px solid var(--line);
+    }
+    .footer small{display:block; margin-top:8px}
+    .seo-copy{
+      font-size:.98rem; color:var(--muted);
+      background:rgba(255,255,255,.5); border:1px dashed rgba(74,45,36,.12);
+      border-radius:20px; padding:18px; margin-top:16px;
+    }
+    @media (max-width: 980px){
+      .hero-grid,.story-wrap,.delivery,.inquiry-wrap{grid-template-columns:1fr}
+      .card-grid,.use-cases{grid-template-columns:repeat(2,1fr)}
+      .products{grid-template-columns:1fr}
+      .nav-links{display:none}
+      .mobile-hide{display:none}
+    }
+    @media (max-width: 640px){
+      .hero{padding-top:34px}
+      .hero-stats,.card-grid,.use-cases,.delivery-list,.row-2,.mini-grid{grid-template-columns:1fr}
+      .nav-cta .btn-secondary{display:none}
+      .footer-inner{flex-direction:column}
+      .btn{width:100%}
+      .hero-actions{display:grid; grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#top" class="brand">
+        <span class="brand-mark">D8</span>
+        <span>D8 Bark</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#flavors">Flavors</a>
+        <a href="#gifting">Gifting</a>
+        <a href="#custom">Custom Orders</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-cta">
+        <a class="btn btn-secondary mobile-hide" href="mailto:jessica.queitsch@gmail.com">Email Us</a>
+        <a class="btn btn-primary" href="#contact">Order Now</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="pill">Chef-driven • Abu Dhabi made • UAE delivery</span>
+          <h1>Date bark, reimagined for gifting, gatherings, and better snacking.</h1>
+          <p>
+            D8 Bark transforms locally sourced Abu Dhabi dates into beautifully layered, chef-curated bars with nut butters,
+            premium chocolate, nuts, crunchy inserts, and custom flavor combinations. Built for everyday indulgence, elevated gifting,
+            events, and one-of-a-kind made-to-order creations across the UAE.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">Start an Order</a>
+            <a class="btn btn-secondary" href="#flavors">Explore Flavors</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat">
+              <strong>Locally made</strong>
+              <span>Crafted in Abu Dhabi with local ingredients and a homegrown point of view.</span>
+            </div>
+            <div class="stat">
+              <strong>Customizable</strong>
+              <span>Choose dates, butters, chocolates, toppings, inserts, and event packaging.</span>
+            </div>
+            <div class="stat">
+              <strong>Perfect for gifting</strong>
+              <span>Corporate gifting, Ramadan boxes, party favors, catering trays, and personal orders.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="mock">
+            <div class="mock-top">
+              <span class="mock-badge">Signature Collection</span>
+              <div class="mock-title">Snickers. Bounty. Pistachio. Tahini. Dark chocolate. Custom anything.</div>
+              <p>
+                A modern date bark concept built around flavor creativity, premium ingredients, and beautiful presentation.
+              </p>
+            </div>
+            <div class="mini-grid">
+              <div class="mini-card">
+                <h4>Gifting & Corporate</h4>
+                <p>Curated boxes, custom sleeves, event cards, branded gifting, and seasonal themes.</p>
+              </div>
+              <div class="mini-card">
+                <h4>Healthy Snacking</h4>
+                <p>Natural sweetness from dates, balanced with nut butters, premium toppings, and thoughtful ingredients.</p>
+              </div>
+              <div class="mini-card">
+                <h4>Custom Orders</h4>
+                <p>Need a unique flavor or dietary profile? We create limited runs and bespoke combinations.</p>
+              </div>
+              <div class="mini-card">
+                <h4>Delivery Across UAE</h4>
+                <p>Dubai, Abu Dhabi, Sharjah, Al Ain, and other Emirates based on order size and timing.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="pill">Why D8 Bark</span>
+            <h2>A playful concept rooted in local ingredients and chef-level creativity.</h2>
+          </div>
+          <p>
+            This is not a generic sweets brand. D8 Bark brings together Abu Dhabi dates, local sourcing, premium fillings,
+            curated flavor combinations, and beautiful presentation in a format that feels modern, giftable, and distinctly regional.
+          </p>
+        </div>
+
+        <div class="card-grid">
+          <article class="feature">
+            <div class="icon">🌴</div>
+            <h3>Authentically local</h3>
+            <p>Made in Abu Dhabi using local dates and a proudly homegrown story that feels real, rooted, and premium.</p>
+          </article>
+          <article class="feature">
+            <div class="icon">🍫</div>
+            <h3>Flavor-first</h3>
+            <p>From candy-inspired classics to elegant nut-forward combinations, every bark is designed to feel craveable and memorable.</p>
+          </article>
+          <article class="feature">
+            <div class="icon">🎁</div>
+            <h3>Built for occasions</h3>
+            <p>Ideal for hostess gifts, Eid and Ramadan boxes, wellness hampers, events, offices, birthdays, and luxury custom orders.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="flavors">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="pill">Signature flavors</span>
+            <h2>Start with the favorites, then make it your own.</h2>
+          </div>
+          <p>
+            Use these as featured products on launch. You can easily update names, photos, pricing, and descriptions as the collection grows.
+          </p>
+        </div>
+
+        <div class="products">
+          <article class="product">
+            <small>Best seller</small>
+            <h3>Snickers Bark</h3>
+            <p>Soft dates layered with almond or peanut-style butter, roasted nuts, caramel-like notes, and chocolate for a nostalgic finish.</p>
+            <ul>
+              <li>Ideal for gifting and first-time orders</li>
+              <li>Rich, crunchy, familiar, and indulgent</li>
+              <li>Easy hero product for ads and content</li>
+            </ul>
+          </article>
+
+          <article class="product">
+            <small>Chef favorite</small>
+            <h3>Bounty Bark</h3>
+            <p>Dates with coconut layers, nut butter, chocolate, and tropical sweetness for a softer, more playful flavor profile.</p>
+            <ul>
+              <li>Great for coconut lovers</li>
+              <li>Works well in elegant boxed assortments</li>
+              <li>Feels fun, modern, and premium</li>
+            </ul>
+          </article>
+
+          <article class="product">
+            <small>Local luxury</small>
+            <h3>Pistachio & Tahini Bark</h3>
+            <p>A more regional take with pistachio, tahini, and dark or milk chocolate, balanced by the richness of Abu Dhabi dates.</p>
+            <ul>
+              <li>Middle East inspired</li>
+              <li>Looks beautiful in premium packaging</li>
+              <li>Excellent for Ramadan and corporate gifting</li>
+            </ul>
+          </article>
+
+          <article class="product">
+            <small>Made to order</small>
+            <h3>Custom Bark</h3>
+            <p>Build your own with your choice of dates, chocolate, nut butter, toppings, crunchy inserts, and even event-specific branding.</p>
+            <ul>
+              <li>Birthdays, weddings, baby showers, launches</li>
+              <li>Dietary preferences and flavor requests welcome</li>
+              <li>Available for trays, boxes, or branded gifting</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="seo-copy">
+          <strong>SEO pages to add later:</strong> Date bark Abu Dhabi • Date bark Dubai • Healthy gifting UAE • Corporate gifts UAE • Ramadan date gifts • Custom dessert gifting Abu Dhabi • Luxury dates UAE • Locally made sweets Abu Dhabi.
+        </div>
+      </div>
+    </section>
+
+    <section id="gifting">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="pill">Occasions & order types</span>
+            <h2>Made for more than just snacking.</h2>
+          </div>
+          <p>
+            Position D8 Bark as both a consumer product and a premium made-to-order service for gifting, catering, and event moments.
+          </p>
+        </div>
+
+        <div class="use-cases">
+          <article class="use-case">
+            <h3>Individual orders</h3>
+            <p>Small-batch boxes for personal treats, home deliveries, and trying new flavors.</p>
+          </article>
+          <article class="use-case">
+            <h3>Corporate gifting</h3>
+            <p>Premium boxes for clients, team gifting, launches, and holiday moments with custom branding options.</p>
+          </article>
+          <article class="use-case">
+            <h3>Catering & events</h3>
+            <p>Tablescape-worthy platters, bite-sized assortments, and party trays for gatherings and celebrations.</p>
+          </article>
+          <article class="use-case">
+            <h3>Bespoke creations</h3>
+            <p>Work with us to create signature flavors, personalized insert cards, or special-edition boxes for your event.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="custom">
+      <div class="container story-wrap">
+        <article class="story">
+          <span class="pill">Our story</span>
+          <h2 style="margin-top:14px">From Abu Dhabi dates to beautifully modern bark.</h2>
+          <p>
+            D8 Bark was born from a love of taking something deeply regional and turning it into something surprising, playful, and premium.
+            We start with local dates and layer them with butters, chocolate, nuts, textures, and chef-led combinations that feel both nostalgic and new.
+          </p>
+          <p style="margin-top:12px">
+            The result is a product that feels rooted in the UAE, easy to gift, highly customizable, and instantly memorable.
+          </p>
+        </article>
+
+        <article class="story">
+          <span class="pill">How custom orders work</span>
+          <h2 style="margin-top:14px">Simple process, highly personalized result.</h2>
+          <p>
+            Tell us your occasion, preferred flavor direction, packaging style, delivery area, and quantity. We can then suggest a curated concept,
+            provide flavor ideas, and organize the order through WhatsApp or email.
+          </p>
+          <p style="margin-top:12px">
+            Great for gifting, hospitality welcome boxes, events, Ramadan drops, office orders, and creative collaborations.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="container delivery">
+        <article class="banner">
+          <span class="pill">Delivery & coverage</span>
+          <h2 style="margin-top:14px">Serving customers across the UAE.</h2>
+          <p>
+            Promote delivery availability clearly from day one. You can later layer in order minimums, lead times, and city-specific delivery pricing.
+          </p>
+          <div class="delivery-list">
+            <div class="delivery-item">Abu Dhabi</div>
+            <div class="delivery-item">Dubai</div>
+            <div class="delivery-item">Sharjah</div>
+            <div class="delivery-item">Al Ain</div>
+            <div class="delivery-item">Ajman</div>
+            <div class="delivery-item">Ras Al Khaimah</div>
+          </div>
+        </article>
+
+        <article class="banner">
+          <span class="pill">Packaging direction</span>
+          <h2 style="margin-top:14px">Giftable, premium, and social-friendly.</h2>
+          <p>
+            Use clean boxes, seasonal sleeves, ingredient cards, and branded notes to make each order feel considered. D8 Bark has strong potential for
+            unboxing, gifting, and visual social content.
+          </p>
+          <p style="margin-top:12px">
+            Add ribbon, gift notes, branded inserts, and event-specific presentation as premium upsells.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container inquiry-wrap">
+        <article class="inquiry-card">
+          <span class="pill">Order & inquiry form</span>
+          <h2 style="margin-top:14px">Let customers reach you in one click.</h2>
+          <p>
+            This form is designed to open WhatsApp directly with the customer's order request details already filled in.
+          </p>
+
+          <form id="orderForm">
+            <div class="row-2">
+              <input type="text" id="name" placeholder="Your name" required />
+              <input type="text" id="phone" placeholder="Phone / WhatsApp number" />
+            </div>
+            <div class="row-2">
+              <select id="orderType">
+                <option>Personal order</option>
+                <option>Corporate gifting</option>
+                <option>Catering / event</option>
+                <option>Custom flavor request</option>
+              </select>
+              <input type="text" id="location" placeholder="Delivery area / Emirate" />
+            </div>
+            <div class="row-2">
+              <input type="text" id="quantity" placeholder="Estimated quantity" />
+              <input type="text" id="timing" placeholder="Needed by date / timing" />
+            </div>
+            <textarea id="notes" placeholder="Tell us what you want: flavor ideas, packaging, dietary notes, gifting needs, event details..."></textarea>
+
+            <div class="hero-actions" style="margin-top:4px">
+              <button type="button" class="btn btn-primary" onclick="sendWhatsApp()">Open WhatsApp Chat</button>
+            </div>
+          </form>
+
+          <p class="form-note">
+            Update the WhatsApp number and email address in the code before publishing. The current placeholders are there to help you launch quickly.
+          </p>
+        </article>
+
+        <article class="inquiry-card">
+          <span class="pill">Contact details</span>
+          <h2 style="margin-top:14px">Use these as your lead-gen conversion points.</h2>
+          <p>
+            Keep the call to action simple: customers fill the form and go straight into a WhatsApp chat with the details pre-filled.
+          </p>
+
+          <div class="contact-list">
+            <div class="contact-item">
+              <strong>WhatsApp orders</strong>
+              <span>+971 XX XXX XXXX</span>
+            </div>
+            <div class="contact-item">
+              <strong>Instagram</strong>
+              <span>@d8bark</span>
+            </div>
+            <div class="contact-item">
+              <strong>Based in</strong>
+              <span>Abu Dhabi, United Arab Emirates</span>
+            </div>
+          </div>
+
+          <div class="seo-copy">
+            <strong>Suggested trust points:</strong> Made in Abu Dhabi • Locally sourced ingredients • Chef-curated flavors • Custom gifting • UAE-wide delivery • Seasonal and corporate orders welcome.
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="pill">FAQ</span>
+            <h2>Quick answers that help convert.</h2>
+          </div>
+          <p>
+            These help reduce back-and-forth and make the brand feel polished even before a full ecommerce checkout is built.
+          </p>
+        </div>
+
+        <div class="faq-list">
+          <article class="faq">
+            <h3>Do you offer custom flavors?</h3>
+            <p>Yes. We can create bespoke date bark combinations based on your preferred flavors, ingredients, packaging style, and quantity.</p>
+          </article>
+          <article class="faq">
+            <h3>Can I order for gifting or events?</h3>
+            <p>Absolutely. We offer personal gifting, corporate boxes, event trays, celebration orders, and other curated formats.</p>
+          </article>
+          <article class="faq">
+            <h3>Do you deliver outside Abu Dhabi?</h3>
+            <p>Yes. We aim to serve customers across the UAE, including Dubai, Sharjah, Al Ain, and other Emirates depending on timing and order size.</p>
+          </article>
+          <article class="faq">
+            <h3>How do I place an order?</h3>
+            <p>You can send your request through WhatsApp or email directly from this website and we will confirm availability, pricing, and lead time.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="brand">
+          <span class="brand-mark">D8</span>
+          <span>D8 Bark</span>
+        </div>
+        <small>Chef-driven date bark from Abu Dhabi. Locally made. Thoughtfully giftable.</small>
+      </div>
+      <div>
+        <small>© 2026 D8 Bark. All rights reserved.</small>
+        <small>Replace placeholder contact details before launch.</small>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const SETTINGS = {
+      whatsappNumber: "971545050266", // Replace with actual number, no + or spaces
+      email: "jessica.queitsch@gmail.com"
+    };
+
+    function getFormMessage() {
+      const name = document.getElementById("name").value || "";
+      const phone = document.getElementById("phone").value || "";
+      const orderType = document.getElementById("orderType").value || "";
+      const location = document.getElementById("location").value || "";
+      const quantity = document.getElementById("quantity").value || "";
+      const timing = document.getElementById("timing").value || "";
+      const notes = document.getElementById("notes").value || "";
+
+      return `Hello D8 Bark!%0A%0AI'm interested in placing an order.%0A%0AName: ${encodeURIComponent(name)}%0APhone: ${encodeURIComponent(phone)}%0AOrder type: ${encodeURIComponent(orderType)}%0ALocation: ${encodeURIComponent(location)}%0AEstimated quantity: ${encodeURIComponent(quantity)}%0ANeeded by: ${encodeURIComponent(timing)}%0ADetails: ${encodeURIComponent(notes)}`;
+    }
+
+    function sendWhatsApp() {
+      const url = `https://wa.me/${SETTINGS.whatsappNumber}?text=${getFormMessage()}`;
+      window.open(url, "_blank");
+    }
+  </script>
+</body>
+</html>
