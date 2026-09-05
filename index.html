@@ -1,688 +1,451 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>D8 Bark | Chef-Driven Date Bark from Abu Dhabi</title>
-  <meta name="description" content="Locally made date bark from Abu Dhabi. Custom gifting, catering, healthy snacking, and made-to-order date bark across the UAE." />
-  <meta name="theme-color" content="#4A2D24" />
-  <meta property="og:title" content="D8 Bark | Chef-Driven Date Bark from Abu Dhabi" />
-  <meta property="og:description" content="Locally made, locally sourced, chef-driven date bark for gifting, catering, and custom orders across the UAE." />
-  <meta property="og:type" content="website" />
-  <style>
-    :root{
-      --bg:#f8f4ef;
-      --card:#fffdf9;
-      --ink:#241713;
-      --muted:#6e5b52;
-      --brand:#4a2d24;
-      --brand-2:#8a5a3b;
-      --accent:#d4a76a;
-      --line:rgba(74,45,36,.12);
-      --shadow:0 18px 45px rgba(48,28,20,.10);
-      --radius:22px;
-      --max:1180px;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at top right, rgba(212,167,106,.20), transparent 28%),
-        linear-gradient(180deg,#fbf8f3 0%, #f8f4ef 38%, #f3ece4 100%);
-      color:var(--ink);
-      line-height:1.6;
-    }
-    a{text-decoration:none;color:inherit}
-    img{max-width:100%;display:block}
-    .container{width:min(calc(100% - 32px), var(--max)); margin:0 auto}
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      border:1px solid var(--line); padding:10px 14px; border-radius:999px;
-      background:rgba(255,255,255,.6); backdrop-filter: blur(10px);
-      color:var(--brand); font-weight:600; font-size:14px;
-    }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:14px 20px; border-radius:999px; font-weight:700;
-      transition:transform .2s ease, box-shadow .2s ease, opacity .2s ease;
-      border:none; cursor:pointer;
-    }
-    .btn:hover{transform:translateY(-1px)}
-    .btn-primary{
-      background:linear-gradient(135deg,var(--brand),#2c1b15);
-      color:#fff; box-shadow:0 12px 28px rgba(74,45,36,.25);
-    }
-    .btn-secondary{
-      background:#fff; color:var(--brand); border:1px solid var(--line);
-      box-shadow:var(--shadow);
-    }
-    .site-header{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(12px);
-      background:rgba(248,244,239,.78);
-      border-bottom:1px solid rgba(74,45,36,.08);
-    }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between; gap:20px;
-      min-height:74px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.02em;
-      color:var(--brand);
-    }
-    .brand-mark{
-      width:40px; height:40px; border-radius:14px;
-      background:linear-gradient(145deg,var(--brand),#7b503c);
-      color:#fff; display:grid; place-items:center; font-weight:900;
-      box-shadow:0 10px 20px rgba(74,45,36,.22);
-    }
-    .nav-links{display:flex; align-items:center; gap:22px; color:var(--muted); font-weight:600}
-    .nav-links a:hover{color:var(--brand)}
-    .nav-cta{display:flex; gap:10px; align-items:center}
-    .mobile-hide{display:block}
-    .hero{
-      padding:72px 0 44px;
-    }
-    .hero-grid{
-      display:grid; grid-template-columns:1.08fr .92fr; gap:34px; align-items:center;
-    }
-    .hero-copy h1{
-      font-family: Georgia, "Times New Roman", serif;
-      font-size:clamp(2.6rem, 6vw, 5rem);
-      line-height:1.03; margin:16px 0 18px; color:var(--brand);
-      letter-spacing:-.03em;
-    }
-    .hero-copy p{
-      font-size:1.1rem; color:var(--muted); max-width:700px;
-    }
-    .hero-actions{display:flex; flex-wrap:wrap; gap:14px; margin-top:26px}
-    .hero-stats{
-      display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:28px;
-    }
-    .stat{
-      background:rgba(255,255,255,.72);
-      border:1px solid var(--line); border-radius:18px; padding:16px;
-      box-shadow:var(--shadow);
-    }
-    .stat strong{display:block; font-size:1.3rem; color:var(--brand)}
-    .stat span{font-size:.95rem; color:var(--muted)}
-    .hero-card{
-      background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,249,242,.95));
-      border:1px solid var(--line); border-radius:30px; padding:24px;
-      box-shadow:var(--shadow);
-      position:relative; overflow:hidden;
-    }
-    .hero-card:before{
-      content:"";
-      position:absolute; inset:auto -40px -40px auto; width:180px; height:180px;
-      background:radial-gradient(circle, rgba(212,167,106,.26), transparent 68%);
-    }
-    .mock{
-      display:grid; gap:14px;
-    }
-    .mock-top{
-      border-radius:22px; padding:20px;
-      min-height:220px;
-      background:
-        linear-gradient(150deg, rgba(74,45,36,.92), rgba(138,90,59,.88)),
-        linear-gradient(45deg,#8c6b55,#3b271f);
-      color:#fff; position:relative; overflow:hidden;
-    }
-    .mock-top:after{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        radial-gradient(circle at 20% 25%, rgba(255,255,255,.18), transparent 20%),
-        radial-gradient(circle at 80% 20%, rgba(255,255,255,.16), transparent 16%),
-        radial-gradient(circle at 78% 80%, rgba(212,167,106,.26), transparent 20%);
-      pointer-events:none;
-    }
-    .mock-badge{
-      display:inline-block; padding:8px 12px; border-radius:999px;
-      background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.18);
-      font-size:13px; font-weight:700; letter-spacing:.03em;
-      position:relative; z-index:1;
-    }
-    .mock-title{
-      position:relative; z-index:1;
-      font-family:Georgia, serif; font-size:2rem; line-height:1.06; margin:16px 0 10px;
-    }
-    .mock-top p{position:relative; z-index:1; max-width:420px; color:rgba(255,255,255,.88)}
-    .mini-grid{
-      display:grid; grid-template-columns:repeat(2,1fr); gap:14px;
-    }
-    .mini-card{
-      background:var(--card); border:1px solid var(--line);
-      border-radius:18px; padding:18px; min-height:124px;
-    }
-    .mini-card h4{margin:0 0 8px; color:var(--brand)}
-    .mini-card p{margin:0; color:var(--muted); font-size:.95rem}
-    section{padding:40px 0}
-    .section-head{
-      display:flex; justify-content:space-between; align-items:end; gap:16px; margin-bottom:22px;
-    }
-    .section-head h2{
-      font-family:Georgia, serif; font-size:clamp(2rem,4vw,3rem); line-height:1.05;
-      color:var(--brand); margin:0;
-    }
-    .section-head p{max-width:650px; margin:0; color:var(--muted)}
-    .card-grid{
-      display:grid; grid-template-columns:repeat(3,1fr); gap:18px;
-    }
-    .feature, .product, .use-case, .faq, .story, .inquiry-card, .banner{
-      background:rgba(255,255,255,.78); border:1px solid var(--line);
-      border-radius:24px; box-shadow:var(--shadow);
-    }
-    .feature{padding:22px}
-    .icon{
-      width:46px; height:46px; border-radius:14px;
-      display:grid; place-items:center; font-size:1.15rem; margin-bottom:14px;
-      background:linear-gradient(145deg,#f2dfc2,#fff6ea);
-      border:1px solid rgba(138,90,59,.14);
-    }
-    h3{margin:0 0 8px; color:var(--brand)}
-    .feature p,.product p,.use-case p,.story p,.faq p,.banner p{margin:0; color:var(--muted)}
-    .products{
-      display:grid; grid-template-columns:repeat(2,1fr); gap:18px;
-    }
-    .product{padding:22px; position:relative; overflow:hidden}
-    .product small{
-      display:inline-flex; margin-bottom:10px; font-weight:700; color:var(--brand-2);
-      background:#fff3e3; border:1px solid rgba(212,167,106,.25);
-      padding:8px 12px; border-radius:999px;
-    }
-    .product ul{
-      margin:14px 0 0; padding-left:18px; color:var(--muted)
-    }
-    .story-wrap{
-      display:grid; grid-template-columns:1fr 1fr; gap:18px;
-    }
-    .story{padding:24px}
-    .use-cases{
-      display:grid; grid-template-columns:repeat(4,1fr); gap:16px;
-    }
-    .use-case{padding:20px}
-    .delivery{
-      display:grid; grid-template-columns:1.05fr .95fr; gap:18px; align-items:stretch;
-    }
-    .banner{padding:24px}
-    .delivery-list{
-      display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:18px;
-    }
-    .delivery-item{
-      padding:14px 16px; border-radius:16px; background:#fff7ec; color:var(--brand);
-      border:1px solid rgba(212,167,106,.24); font-weight:700;
-    }
-    .inquiry-wrap{
-      display:grid; grid-template-columns:1.1fr .9fr; gap:18px;
-    }
-    .inquiry-card{padding:24px}
-    .contact-list{
-      display:grid; gap:12px; margin-top:16px;
-    }
-    .contact-item{
-      padding:16px 18px; border-radius:18px; border:1px solid var(--line); background:#fff;
-    }
-    .contact-item strong{display:block; color:var(--brand)}
-    form{
-      display:grid; gap:12px; margin-top:16px;
-    }
-    .row-2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
-    input, select, textarea{
-      width:100%; padding:14px 16px; border-radius:16px;
-      border:1px solid rgba(74,45,36,.14); background:#fff; color:var(--ink);
-      font:inherit;
-    }
-    textarea{min-height:120px; resize:vertical}
-    .form-note{font-size:.9rem; color:var(--muted); margin-top:12px}
-    .faq-list{display:grid; gap:14px}
-    .faq{padding:20px}
-    .footer{
-      padding:40px 0 60px; color:var(--muted);
-    }
-    .footer-inner{
-      display:flex; justify-content:space-between; gap:20px; align-items:flex-start;
-      padding-top:28px; border-top:1px solid var(--line);
-    }
-    .footer small{display:block; margin-top:8px}
-    .seo-copy{
-      font-size:.98rem; color:var(--muted);
-      background:rgba(255,255,255,.5); border:1px dashed rgba(74,45,36,.12);
-      border-radius:20px; padding:18px; margin-top:16px;
-    }
-    @media (max-width: 980px){
-      .hero-grid,.story-wrap,.delivery,.inquiry-wrap{grid-template-columns:1fr}
-      .card-grid,.use-cases{grid-template-columns:repeat(2,1fr)}
-      .products{grid-template-columns:1fr}
-      .nav-links{display:none}
-      .mobile-hide{display:none}
-    }
-    @media (max-width: 640px){
-      .hero{padding-top:34px}
-      .hero-stats,.card-grid,.use-cases,.delivery-list,.row-2,.mini-grid{grid-template-columns:1fr}
-      .nav-cta .btn-secondary{display:none}
-      .footer-inner{flex-direction:column}
-      .btn{width:100%}
-      .hero-actions{display:grid; grid-template-columns:1fr}
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>D8 Bark | Fresh Date Bark & Healthy Snacks Dubai</title>
+  <meta name="description" content="D8 Bark makes fresh Medjool date bark in Dubai. Choose a signature flavor or build your own date bark with your spread, chocolate, crunch and finish. Small batch UAE delivery by request.">
+  <meta name="keywords" content="date bark Dubai, date snacks Dubai, healthy snacks Dubai, date snacks UAE, Medjool date snacks, chocolate date bark, energy snacks Dubai, build your own date bark">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://d8bark.com/">
+  <meta name="theme-color" content="#1c2418">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="D8 Bark | Date Bark. Built Your Way.">
+  <meta property="og:description" content="Fresh Medjool date bark made in Dubai. Choose a signature bark or build your own sheet.">
+  <meta property="og:url" content="https://d8bark.com/">
+  <meta property="og:image" content="https://d8bark.com/assets/images/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="D8 Bark | Date Bark. Built Your Way.">
+  <meta name="twitter:description" content="Fresh date bark made to order in Dubai. Build your own or choose a signature flavor.">
+  <meta name="twitter:image" content="https://d8bark.com/assets/images/og.jpg">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"Organization",
+        "@id":"https://d8bark.com/#organization",
+        "name":"D8 Bark",
+        "url":"https://d8bark.com/",
+        "logo":"https://d8bark.com/favicon.svg",
+        "description":"Fresh Medjool date bark made in Dubai with signature flavors and build your own sheets.",
+        "areaServed":{"@type":"Country","name":"United Arab Emirates"},
+        "email":"orders@d8bark.com"
+      },
+      {
+        "@type":"WebSite",
+        "@id":"https://d8bark.com/#website",
+        "url":"https://d8bark.com/",
+        "name":"D8 Bark",
+        "publisher":{"@id":"https://d8bark.com/#organization"},
+        "inLanguage":"en-AE"
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"What is date bark?","acceptedAnswer":{"@type":"Answer","text":"Date bark is a layered snack made with pressed dates, a spread, chocolate and toppings. D8 Bark makes it as a fresh sheet designed to snap, share and snack."}},
+          {"@type":"Question","name":"Can I build my own date bark?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose your spread, chocolate, up to two crunch options and one finish. Submit the build as an order request and D8 Bark confirms availability, total and delivery."}},
+          {"@type":"Question","name":"Where does D8 Bark deliver?","acceptedAnswer":{"@type":"Answer","text":"D8 Bark is made in Dubai. Dubai delivery is available by request, with other UAE locations confirmed individually based on timing and courier availability."}},
+          {"@type":"Question","name":"How should I store date bark?","acceptedAnswer":{"@type":"Answer","text":"Keep your bark chilled in its sealed pack. Because chocolate can soften in UAE heat, refrigerate it after delivery and take out only what you plan to enjoy."}}
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container nav">
-      <a href="#top" class="brand">
-        <span class="brand-mark">D8</span>
-        <span>D8 Bark</span>
-      </a>
-      <nav class="nav-links">
-        <a href="#about">About</a>
-        <a href="#flavors">Flavors</a>
-        <a href="#gifting">Gifting</a>
-        <a href="#custom">Custom Orders</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <div class="nav-cta">
-        <a class="btn btn-secondary mobile-hide" href="mailto:jessica.queitsch@gmail.com">Email Us</a>
-        <a class="btn btn-primary" href="#contact">Order Now</a>
-      </div>
-    </div>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="announcement" role="status">
+    <strong>SMALL BATCH. MADE IN DUBAI.</strong>
+    <span>UAE delivery by request</span>
+  </div>
+
+  <header class="site-header" id="top">
+    <a class="brand" href="#top" aria-label="D8 Bark home">
+      <span class="brand-d8">D8</span>
+      <span class="brand-bark">BARK</span>
+    </a>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">MENU</button>
+    <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+      <a href="#builder">BUILD YOUR BARK</a>
+      <a href="#signature">SIGNATURE BARKS</a>
+      <a href="#ingredients">INGREDIENTS</a>
+      <a href="#story">OUR STORY</a>
+      <a href="#faq">FAQ</a>
+      <a class="nav-cta" href="#builder">REQUEST A BARK</a>
+    </nav>
   </header>
 
-  <main id="top">
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <span class="pill">Chef-driven • Abu Dhabi made • UAE delivery</span>
-          <h1>Date bark, reimagined for gifting, gatherings, and better snacking.</h1>
-          <p>
-            D8 Bark transforms locally sourced Abu Dhabi dates into beautifully layered, chef-curated bars with nut butters,
-            premium chocolate, nuts, crunchy inserts, and custom flavor combinations. Built for everyday indulgence, elevated gifting,
-            events, and one-of-a-kind made-to-order creations across the UAE.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#contact">Start an Order</a>
-            <a class="btn btn-secondary" href="#flavors">Explore Flavors</a>
-          </div>
-          <div class="hero-stats">
-            <div class="stat">
-              <strong>Locally made</strong>
-              <span>Crafted in Abu Dhabi with local ingredients and a homegrown point of view.</span>
-            </div>
-            <div class="stat">
-              <strong>Customizable</strong>
-              <span>Choose dates, butters, chocolates, toppings, inserts, and event packaging.</span>
-            </div>
-            <div class="stat">
-              <strong>Perfect for gifting</strong>
-              <span>Corporate gifting, Ramadan boxes, party favors, catering trays, and personal orders.</span>
-            </div>
-          </div>
+  <main id="main">
+    <section class="hero section-shell" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div class="eyebrow">DATE BARK. BUILT YOUR WAY.</div>
+        <h1 id="hero-title">REAL DATES.<br>SERIOUS SNACK.</h1>
+        <p class="hero-lede">Fresh Medjool date bark made to order in Dubai. Build your own sheet or choose one of our signature combinations.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#builder">BUILD YOUR BARK <span aria-hidden="true">→</span></a>
+          <a class="button text" href="#signature">SEE THE SIGNATURES</a>
         </div>
-
-        <div class="hero-card">
-          <div class="mock">
-            <div class="mock-top">
-              <span class="mock-badge">Signature Collection</span>
-              <div class="mock-title">Snickers. Bounty. Pistachio. Tahini. Dark chocolate. Custom anything.</div>
-              <p>
-                A modern date bark concept built around flavor creativity, premium ingredients, and beautiful presentation.
-              </p>
-            </div>
-            <div class="mini-grid">
-              <div class="mini-card">
-                <h4>Gifting & Corporate</h4>
-                <p>Curated boxes, custom sleeves, event cards, branded gifting, and seasonal themes.</p>
-              </div>
-              <div class="mini-card">
-                <h4>Healthy Snacking</h4>
-                <p>Natural sweetness from dates, balanced with nut butters, premium toppings, and thoughtful ingredients.</p>
-              </div>
-              <div class="mini-card">
-                <h4>Custom Orders</h4>
-                <p>Need a unique flavor or dietary profile? We create limited runs and bespoke combinations.</p>
-              </div>
-              <div class="mini-card">
-                <h4>Delivery Across UAE</h4>
-                <p>Dubai, Abu Dhabi, Sharjah, Al Ain, and other Emirates based on order size and timing.</p>
-              </div>
-            </div>
-          </div>
+        <div class="benefit-row" aria-label="D8 Bark benefits">
+          <div><span class="icon-circle">◐</span><strong>NATURALLY SWEET</strong></div>
+          <div><span class="icon-circle">⚡</span><strong>ENERGY READY</strong></div>
+          <div><span class="icon-circle">✦</span><strong>REAL INGREDIENTS</strong></div>
+          <div><span class="icon-circle">⌂</span><strong>MADE FRESH IN DUBAI</strong></div>
         </div>
+      </div>
+      <div class="hero-image-wrap">
+        <img src="assets/images/hero_product.jpg" width="900" height="1100" alt="Pistachio dark chocolate D8 date bark with Medjool dates and pistachios" fetchpriority="high">
+        <div class="hero-note" aria-hidden="true">Dates.<br>Chocolate.<br>Nuts.<br><strong>That is it.</strong></div>
       </div>
     </section>
 
-    <section id="about">
-      <div class="container">
-        <div class="section-head">
+    <section class="builder-section" id="builder" aria-labelledby="builder-title">
+      <div class="section-shell builder-shell">
+        <div class="section-heading">
           <div>
-            <span class="pill">Why D8 Bark</span>
-            <h2>A playful concept rooted in local ingredients and chef-level creativity.</h2>
+            <div class="eyebrow green">BUILD YOUR OWN</div>
+            <h2 id="builder-title">BUILD YOUR BARK</h2>
           </div>
-          <p>
-            This is not a generic sweets brand. D8 Bark brings together Abu Dhabi dates, local sourcing, premium fillings,
-            curated flavor combinations, and beautiful presentation in a format that feels modern, giftable, and distinctly regional.
-          </p>
+          <p>Every custom sheet starts with pressed Medjool dates. Pick the rest. One spread, one chocolate, up to two crunches and one finish. Custom bark starts at AED 72.</p>
         </div>
 
-        <div class="card-grid">
-          <article class="feature">
-            <div class="icon">🌴</div>
-            <h3>Authentically local</h3>
-            <p>Made in Abu Dhabi using local dates and a proudly homegrown story that feels real, rooted, and premium.</p>
-          </article>
-          <article class="feature">
-            <div class="icon">🍫</div>
-            <h3>Flavor-first</h3>
-            <p>From candy-inspired classics to elegant nut-forward combinations, every bark is designed to feel craveable and memorable.</p>
-          </article>
-          <article class="feature">
-            <div class="icon">🎁</div>
-            <h3>Built for occasions</h3>
-            <p>Ideal for hostess gifts, Eid and Ramadan boxes, wellness hampers, events, offices, birthdays, and luxury custom orders.</p>
-          </article>
-        </div>
-      </div>
-    </section>
+        <div class="builder-layout">
+          <form class="builder-card" id="bark-builder">
+            <fieldset class="build-step">
+              <legend><span class="step-number">1</span><span>CHOOSE YOUR SPREAD</span></legend>
+              <div class="option-grid four" data-radio-group="spread">
+                <label class="ingredient-option">
+                  <input type="radio" name="spread" value="Peanut Butter" checked>
+                  <span class="ingredient-image"><img src="assets/images/spread_peanut.jpg" alt="Peanut butter"></span>
+                  <span class="ingredient-label">Peanut Butter</span>
+                </label>
+                <label class="ingredient-option">
+                  <input type="radio" name="spread" value="Pistachio Butter">
+                  <span class="ingredient-image"><img src="assets/images/spread_pistachio.jpg" alt="Pistachio butter"></span>
+                  <span class="ingredient-label">Pistachio Butter</span>
+                </label>
+                <label class="ingredient-option">
+                  <input type="radio" name="spread" value="Almond Butter">
+                  <span class="ingredient-image"><img src="assets/images/spread_almond.jpg" alt="Almond butter"></span>
+                  <span class="ingredient-label">Almond Butter</span>
+                </label>
+                <label class="ingredient-option">
+                  <input type="radio" name="spread" value="Tahini">
+                  <span class="ingredient-image"><img src="assets/images/spread_tahini.jpg" alt="Tahini"></span>
+                  <span class="ingredient-label">Tahini</span>
+                </label>
+              </div>
+            </fieldset>
 
-    <section id="flavors">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="pill">Signature flavors</span>
-            <h2>Start with the favorites, then make it your own.</h2>
-          </div>
-          <p>
-            Use these as featured products on launch. You can easily update names, photos, pricing, and descriptions as the collection grows.
-          </p>
-        </div>
+            <fieldset class="build-step">
+              <legend><span class="step-number">2</span><span>CHOOSE YOUR CHOCOLATE</span></legend>
+              <div class="option-grid three" data-radio-group="chocolate">
+                <label class="ingredient-option">
+                  <input type="radio" name="chocolate" value="Dark Chocolate 70%" checked>
+                  <span class="ingredient-image"><img src="assets/images/chocolate_dark.jpg" alt="Dark chocolate"></span>
+                  <span class="ingredient-label">Dark 70%</span>
+                </label>
+                <label class="ingredient-option">
+                  <input type="radio" name="chocolate" value="Milk Chocolate">
+                  <span class="ingredient-image"><img src="assets/images/chocolate_milk.jpg" alt="Milk chocolate"></span>
+                  <span class="ingredient-label">Milk</span>
+                </label>
+                <label class="ingredient-option">
+                  <input type="radio" name="chocolate" value="White Chocolate">
+                  <span class="ingredient-image"><img src="assets/images/chocolate_white.jpg" alt="White chocolate"></span>
+                  <span class="ingredient-label">White</span>
+                </label>
+              </div>
+            </fieldset>
 
-        <div class="products">
-          <article class="product">
-            <small>Best seller</small>
-            <h3>Snickers Bark</h3>
-            <p>Soft dates layered with almond or peanut-style butter, roasted nuts, caramel-like notes, and chocolate for a nostalgic finish.</p>
-            <ul>
-              <li>Ideal for gifting and first-time orders</li>
-              <li>Rich, crunchy, familiar, and indulgent</li>
-              <li>Easy hero product for ads and content</li>
-            </ul>
-          </article>
+            <fieldset class="build-step">
+              <legend><span class="step-number">3</span><span>ADD YOUR CRUNCH <small>Choose up to 2</small></span></legend>
+              <div class="option-grid five" id="crunch-options">
+                <label class="ingredient-option">
+                  <input type="checkbox" name="crunch" value="Pistachios" checked>
+                  <span class="ingredient-image"><img src="assets/images/crunch_pistachio.jpg" alt="Pistachios"></span>
+                  <span class="ingredient-label">Pistachios</span>
+                </label>
+                <label class="ingredient-option">
+                  <input type="checkbox" name="crunch" value="Almonds">
+                  <span class="ingredient-image"><img src="assets/images/crunch_almonds.jpg" alt="Almonds"></span>
+                  <span class="ingredient-label">Almonds</span>
+                </label>
+                <label class="ingredient-option">
+                  <input type="checkbox" name="crunch" value="Peanuts">
+                  <span class="ingredient-image"><img src="assets/images/crunch_peanuts.jpg" alt="Peanuts"></span>
+                  <span class="ingredient-label">Peanuts</span>
+                </label>
+                <label class="ingredient-option">
+                  <input type="checkbox" name="crunch" value="Coconut">
+                  <span class="ingredient-image"><img src="assets/images/crunch_coconut.jpg" alt="Coconut"></span>
+                  <span class="ingredient-label">Coconut</span>
+                </label>
+                <label class="ingredient-option">
+                  <input type="checkbox" name="crunch" value="Cacao Nibs">
+                  <span class="ingredient-image"><img src="assets/images/crunch_cacao.jpg" alt="Cacao nibs"></span>
+                  <span class="ingredient-label">Cacao Nibs</span>
+                </label>
+              </div>
+              <p class="field-help" id="crunch-help">1 of 2 selected</p>
+            </fieldset>
 
-          <article class="product">
-            <small>Chef favorite</small>
-            <h3>Bounty Bark</h3>
-            <p>Dates with coconut layers, nut butter, chocolate, and tropical sweetness for a softer, more playful flavor profile.</p>
-            <ul>
-              <li>Great for coconut lovers</li>
-              <li>Works well in elegant boxed assortments</li>
-              <li>Feels fun, modern, and premium</li>
-            </ul>
-          </article>
-
-          <article class="product">
-            <small>Local luxury</small>
-            <h3>Pistachio & Tahini Bark</h3>
-            <p>A more regional take with pistachio, tahini, and dark or milk chocolate, balanced by the richness of Abu Dhabi dates.</p>
-            <ul>
-              <li>Middle East inspired</li>
-              <li>Looks beautiful in premium packaging</li>
-              <li>Excellent for Ramadan and corporate gifting</li>
-            </ul>
-          </article>
-
-          <article class="product">
-            <small>Made to order</small>
-            <h3>Custom Bark</h3>
-            <p>Build your own with your choice of dates, chocolate, nut butter, toppings, crunchy inserts, and even event-specific branding.</p>
-            <ul>
-              <li>Birthdays, weddings, baby showers, launches</li>
-              <li>Dietary preferences and flavor requests welcome</li>
-              <li>Available for trays, boxes, or branded gifting</li>
-            </ul>
-          </article>
-        </div>
-
-        <div class="seo-copy">
-          <strong>SEO pages to add later:</strong> Date bark Abu Dhabi • Date bark Dubai • Healthy gifting UAE • Corporate gifts UAE • Ramadan date gifts • Custom dessert gifting Abu Dhabi • Luxury dates UAE • Locally made sweets Abu Dhabi.
-        </div>
-      </div>
-    </section>
-
-    <section id="gifting">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="pill">Occasions & order types</span>
-            <h2>Made for more than just snacking.</h2>
-          </div>
-          <p>
-            Position D8 Bark as both a consumer product and a premium made-to-order service for gifting, catering, and event moments.
-          </p>
-        </div>
-
-        <div class="use-cases">
-          <article class="use-case">
-            <h3>Individual orders</h3>
-            <p>Small-batch boxes for personal treats, home deliveries, and trying new flavors.</p>
-          </article>
-          <article class="use-case">
-            <h3>Corporate gifting</h3>
-            <p>Premium boxes for clients, team gifting, launches, and holiday moments with custom branding options.</p>
-          </article>
-          <article class="use-case">
-            <h3>Catering & events</h3>
-            <p>Tablescape-worthy platters, bite-sized assortments, and party trays for gatherings and celebrations.</p>
-          </article>
-          <article class="use-case">
-            <h3>Bespoke creations</h3>
-            <p>Work with us to create signature flavors, personalized insert cards, or special-edition boxes for your event.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="custom">
-      <div class="container story-wrap">
-        <article class="story">
-          <span class="pill">Our story</span>
-          <h2 style="margin-top:14px">From Abu Dhabi dates to beautifully modern bark.</h2>
-          <p>
-            D8 Bark was born from a love of taking something deeply regional and turning it into something surprising, playful, and premium.
-            We start with local dates and layer them with butters, chocolate, nuts, textures, and chef-led combinations that feel both nostalgic and new.
-          </p>
-          <p style="margin-top:12px">
-            The result is a product that feels rooted in the UAE, easy to gift, highly customizable, and instantly memorable.
-          </p>
-        </article>
-
-        <article class="story">
-          <span class="pill">How custom orders work</span>
-          <h2 style="margin-top:14px">Simple process, highly personalized result.</h2>
-          <p>
-            Tell us your occasion, preferred flavor direction, packaging style, delivery area, and quantity. We can then suggest a curated concept,
-            provide flavor ideas, and organize the order through WhatsApp or email.
-          </p>
-          <p style="margin-top:12px">
-            Great for gifting, hospitality welcome boxes, events, Ramadan drops, office orders, and creative collaborations.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <section>
-      <div class="container delivery">
-        <article class="banner">
-          <span class="pill">Delivery & coverage</span>
-          <h2 style="margin-top:14px">Serving customers across the UAE.</h2>
-          <p>
-            Promote delivery availability clearly from day one. You can later layer in order minimums, lead times, and city-specific delivery pricing.
-          </p>
-          <div class="delivery-list">
-            <div class="delivery-item">Abu Dhabi</div>
-            <div class="delivery-item">Dubai</div>
-            <div class="delivery-item">Sharjah</div>
-            <div class="delivery-item">Al Ain</div>
-            <div class="delivery-item">Ajman</div>
-            <div class="delivery-item">Ras Al Khaimah</div>
-          </div>
-        </article>
-
-        <article class="banner">
-          <span class="pill">Packaging direction</span>
-          <h2 style="margin-top:14px">Giftable, premium, and social-friendly.</h2>
-          <p>
-            Use clean boxes, seasonal sleeves, ingredient cards, and branded notes to make each order feel considered. D8 Bark has strong potential for
-            unboxing, gifting, and visual social content.
-          </p>
-          <p style="margin-top:12px">
-            Add ribbon, gift notes, branded inserts, and event-specific presentation as premium upsells.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="container inquiry-wrap">
-        <article class="inquiry-card">
-          <span class="pill">Order & inquiry form</span>
-          <h2 style="margin-top:14px">Let customers reach you in one click.</h2>
-          <p>
-            This form is designed to open WhatsApp directly with the customer's order request details already filled in.
-          </p>
-
-          <form id="orderForm">
-            <div class="row-2">
-              <input type="text" id="name" placeholder="Your name" required />
-              <input type="text" id="phone" placeholder="Phone / WhatsApp number" />
-            </div>
-            <div class="row-2">
-              <select id="orderType">
-                <option>Personal order</option>
-                <option>Corporate gifting</option>
-                <option>Catering / event</option>
-                <option>Custom flavor request</option>
-              </select>
-              <input type="text" id="location" placeholder="Delivery area / Emirate" />
-            </div>
-            <div class="row-2">
-              <input type="text" id="quantity" placeholder="Estimated quantity" />
-              <input type="text" id="timing" placeholder="Needed by date / timing" />
-            </div>
-            <textarea id="notes" placeholder="Tell us what you want: flavor ideas, packaging, dietary notes, gifting needs, event details..."></textarea>
-
-            <div class="hero-actions" style="margin-top:4px">
-              <button type="button" class="btn btn-primary" onclick="sendWhatsApp()">Open WhatsApp Chat</button>
-            </div>
+            <fieldset class="build-step">
+              <legend><span class="step-number">4</span><span>PICK YOUR FINISH</span></legend>
+              <div class="option-grid five" data-radio-group="finish">
+                <label class="ingredient-option">
+                  <input type="radio" name="finish" value="Sea Salt" checked>
+                  <span class="ingredient-image"><img src="assets/images/finish_salt.jpg" alt="Sea salt"></span>
+                  <span class="ingredient-label">Sea Salt</span>
+                </label>
+                <label class="ingredient-option">
+                  <input type="radio" name="finish" value="Cinnamon">
+                  <span class="ingredient-image"><img src="assets/images/finish_cinnamon.jpg" alt="Cinnamon"></span>
+                  <span class="ingredient-label">Cinnamon</span>
+                </label>
+                <label class="ingredient-option">
+                  <input type="radio" name="finish" value="Freeze Dried Raspberry">
+                  <span class="ingredient-image"><img src="assets/images/finish_raspberry.jpg" alt="Freeze dried raspberry"></span>
+                  <span class="ingredient-label">Raspberry</span>
+                </label>
+                <label class="ingredient-option">
+                  <input type="radio" name="finish" value="Sesame">
+                  <span class="ingredient-image"><img src="assets/images/finish_sesame.jpg" alt="Sesame"></span>
+                  <span class="ingredient-label">Sesame</span>
+                </label>
+                <label class="ingredient-option">
+                  <input type="radio" name="finish" value="Coconut">
+                  <span class="ingredient-image"><img src="assets/images/finish_coconut.jpg" alt="Coconut"></span>
+                  <span class="ingredient-label">Coconut</span>
+                </label>
+              </div>
+            </fieldset>
           </form>
 
-          <p class="form-note">
-            Update the WhatsApp number and email address in the code before publishing. The current placeholders are there to help you launch quickly.
-          </p>
+          <aside class="build-summary" aria-live="polite">
+            <div class="summary-kicker">YOUR D8</div>
+            <h3>Custom Date Bark Sheet</h3>
+            <p class="summary-base">Pressed Medjool date base</p>
+            <dl id="build-summary-list">
+              <div><dt>Spread</dt><dd id="summary-spread">Peanut Butter</dd></div>
+              <div><dt>Chocolate</dt><dd id="summary-chocolate">Dark Chocolate 70%</dd></div>
+              <div><dt>Crunch</dt><dd id="summary-crunch">Pistachios</dd></div>
+              <div><dt>Finish</dt><dd id="summary-finish">Sea Salt</dd></div>
+            </dl>
+            <div class="summary-price">
+              <span>Custom sheet</span>
+              <strong>AED 72</strong>
+            </div>
+            <p class="small-copy">Custom bark starts at AED 72 per sheet. Final availability and delivery fee are confirmed before production.</p>
+            <button class="button primary full" type="button" id="request-build">REQUEST MY D8 <span aria-hidden="true">→</span></button>
+            <button class="link-button" type="button" id="reset-builder">RESET BUILD</button>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="signature-section section-shell" id="signature" aria-labelledby="signature-title">
+      <div class="section-heading signature-heading">
+        <div>
+          <div class="eyebrow">SIGNATURE FLAVORS</div>
+          <h2 id="signature-title">OUR SIGNATURE BARKS</h2>
+        </div>
+        <p>Crafted combinations for when you want the easy answer. Each one is made as a shareable bark sheet, with signature pricing starting above the custom build.</p>
+      </div>
+
+      <div class="product-grid">
+        <article class="product-card" data-product="Original D8" data-price="72">
+          <img src="assets/images/signature_original.jpg" alt="Original D8 date bark with dark chocolate, peanut butter and peanuts" loading="lazy">
+          <div class="product-body">
+            <h3>ORIGINAL D8</h3>
+            <p>Peanut butter, dark chocolate, roasted peanuts, sea salt.</p>
+            <div class="product-meta"><strong>AED 72</strong><span>per sheet</span></div>
+            <button class="button outline product-request" type="button">REQUEST THIS BARK</button>
+          </div>
         </article>
 
-        <article class="inquiry-card">
-          <span class="pill">Contact details</span>
-          <h2 style="margin-top:14px">Use these as your lead-gen conversion points.</h2>
-          <p>
-            Keep the call to action simple: customers fill the form and go straight into a WhatsApp chat with the details pre-filled.
-          </p>
-
-          <div class="contact-list">
-            <div class="contact-item">
-              <strong>WhatsApp orders</strong>
-              <span>+971 XX XXX XXXX</span>
-            </div>
-            <div class="contact-item">
-              <strong>Instagram</strong>
-              <span>@d8bark</span>
-            </div>
-            <div class="contact-item">
-              <strong>Based in</strong>
-              <span>Abu Dhabi, United Arab Emirates</span>
-            </div>
+        <article class="product-card" data-product="Dubai Crunch" data-price="78">
+          <img src="assets/images/signature_dubai.jpg" alt="Dubai Crunch date bark with pistachio, dark chocolate and pistachios" loading="lazy">
+          <div class="product-body">
+            <h3>DUBAI CRUNCH</h3>
+            <p>Pistachio butter, dark chocolate, pistachios, tahini drizzle, sea salt.</p>
+            <div class="product-meta"><strong>AED 78</strong><span>per sheet</span></div>
+            <button class="button outline product-request" type="button">REQUEST THIS BARK</button>
           </div>
+        </article>
 
-          <div class="seo-copy">
-            <strong>Suggested trust points:</strong> Made in Abu Dhabi • Locally sourced ingredients • Chef-curated flavors • Custom gifting • UAE-wide delivery • Seasonal and corporate orders welcome.
+        <article class="product-card" data-product="Almond Crunch" data-price="76">
+          <img src="assets/images/signature_almond.jpg" alt="Almond Crunch date bark with almond butter and cacao nibs" loading="lazy">
+          <div class="product-body">
+            <h3>ALMOND CRUNCH</h3>
+            <p>Almond butter, dark chocolate, roasted almonds, cacao nibs, sea salt.</p>
+            <div class="product-meta"><strong>AED 76</strong><span>per sheet</span></div>
+            <button class="button outline product-request" type="button">REQUEST THIS BARK</button>
+          </div>
+        </article>
+
+        <article class="product-card" data-product="PB Crunch" data-price="74">
+          <img src="assets/images/signature_pb.jpg" alt="PB Crunch date bark with peanut butter, milk chocolate and raspberry" loading="lazy">
+          <div class="product-body">
+            <h3>PB CRUNCH</h3>
+            <p>Peanut butter, milk chocolate, peanuts, freeze dried raspberry.</p>
+            <div class="product-meta"><strong>AED 74</strong><span>per sheet</span></div>
+            <button class="button outline product-request" type="button">REQUEST THIS BARK</button>
           </div>
         </article>
       </div>
     </section>
 
-    <section>
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="pill">FAQ</span>
-            <h2>Quick answers that help convert.</h2>
-          </div>
-          <p>
-            These help reduce back-and-forth and make the brand feel polished even before a full ecommerce checkout is built.
-          </p>
-        </div>
+    <section class="lifestyle-grid" aria-label="D8 Bark lifestyle">
+      <article class="lifestyle-tile dark">
+        <img src="assets/images/lifestyle_gym.jpg" alt="D8 Bark beside a gym bag after training" loading="lazy">
+        <div><h2>FUEL YOUR DAY.</h2><p>A date snack built for active days, desk drawers and the ride home.</p></div>
+      </article>
+      <article class="lifestyle-tile">
+        <img src="assets/images/lifestyle_box.jpg" alt="D8 Bark sheet inside its delivery box" loading="lazy">
+        <div><h2>GOOD ENERGY INSIDE.</h2><p>One full sheet. Break what you want. Keep the rest chilled.</p></div>
+      </article>
+      <article class="lifestyle-tile">
+        <img src="assets/images/lifestyle_snap.jpg" alt="Hands snapping pieces of chocolate date bark" loading="lazy">
+        <div><h2>SNAP. SHARE. ENJOY.</h2><p>The bark format is part of the experience.</p></div>
+      </article>
+      <article class="lifestyle-tile">
+        <img src="assets/images/lifestyle_dubai.jpg" alt="Date bark enjoyed outdoors in Dubai" loading="lazy">
+        <div><h2>ANYTIME. ANYWHERE.</h2><p>Made fresh in Dubai for snack breaks across the UAE.</p></div>
+      </article>
+    </section>
 
-        <div class="faq-list">
-          <article class="faq">
-            <h3>Do you offer custom flavors?</h3>
-            <p>Yes. We can create bespoke date bark combinations based on your preferred flavors, ingredients, packaging style, and quantity.</p>
-          </article>
-          <article class="faq">
-            <h3>Can I order for gifting or events?</h3>
-            <p>Absolutely. We offer personal gifting, corporate boxes, event trays, celebration orders, and other curated formats.</p>
-          </article>
-          <article class="faq">
-            <h3>Do you deliver outside Abu Dhabi?</h3>
-            <p>Yes. We aim to serve customers across the UAE, including Dubai, Sharjah, Al Ain, and other Emirates depending on timing and order size.</p>
-          </article>
-          <article class="faq">
-            <h3>How do I place an order?</h3>
-            <p>You can send your request through WhatsApp or email directly from this website and we will confirm availability, pricing, and lead time.</p>
-          </article>
+    <section class="ingredients-section" id="ingredients">
+      <div class="section-shell ingredient-layout">
+        <div class="ingredient-copy">
+          <div class="eyebrow green">WHAT GOES IN</div>
+          <h2>REAL INGREDIENTS.<br>NOT A SCIENCE PROJECT.</h2>
+          <p>D8 starts with Medjool dates, then layers the things you actually want to eat: nut or seed spreads, chocolate, roasted crunch and simple finishes.</p>
+          <p>Every order is made in small batches. Ingredient availability can change, which is why custom builds are confirmed before production.</p>
+          <a class="button primary" href="#builder">BUILD YOUR D8 <span aria-hidden="true">→</span></a>
         </div>
+        <div class="ingredient-stack">
+          <div class="ingredient-strip"><span>01</span><strong>MEDJOOL DATES</strong><small>The base</small></div>
+          <div class="ingredient-strip"><span>02</span><strong>YOUR SPREAD</strong><small>Creamy layer</small></div>
+          <div class="ingredient-strip"><span>03</span><strong>YOUR CHOCOLATE</strong><small>The snap</small></div>
+          <div class="ingredient-strip"><span>04</span><strong>YOUR CRUNCH</strong><small>Texture matters</small></div>
+          <div class="ingredient-strip"><span>05</span><strong>YOUR FINISH</strong><small>Make it yours</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="how-section section-shell" aria-labelledby="how-title">
+      <div class="section-heading">
+        <div><div class="eyebrow">HOW IT WORKS</div><h2 id="how-title">FROM BUILD TO BARK.</h2></div>
+        <p>We are starting small on purpose. Orders are requested first, then confirmed before we make your sheet.</p>
+      </div>
+      <div class="how-grid">
+        <article><span>1</span><h3>BUILD OR PICK</h3><p>Create a custom bark or choose a signature sheet.</p></article>
+        <article><span>2</span><h3>SEND YOUR REQUEST</h3><p>Tell us quantity, delivery area and preferred date.</p></article>
+        <article><span>3</span><h3>WE CONFIRM</h3><p>We confirm availability, final total and delivery timing.</p></article>
+        <article><span>4</span><h3>WE MAKE IT FRESH</h3><p>Your bark is prepared, chilled, packed and sent out.</p></article>
+      </div>
+    </section>
+
+    <section class="story-section" id="story">
+      <div class="section-shell story-grid">
+        <div>
+          <div class="eyebrow light">WHY D8</div>
+          <h2>SNACK OUTSIDE THE BAR.</h2>
+        </div>
+        <div class="story-copy">
+          <p>We liked date snacks. We liked chocolate bark. We liked the idea of choosing exactly what goes on top. D8 puts those things together into one simple format.</p>
+          <p>No complicated product lineup. No endless flavors sitting on a shelf. Start with dates. Build a sheet. Snap off a piece when you want it.</p>
+          <strong>DATE BARK. BUILT YOUR WAY.</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="seo-section section-shell" aria-labelledby="dubai-title">
+      <div class="seo-grid">
+        <div>
+          <div class="eyebrow green">D8 IN DUBAI</div>
+          <h2 id="dubai-title">DATE BARK & DATE SNACKS IN DUBAI</h2>
+        </div>
+        <div>
+          <p>Looking for a date snack in Dubai that feels more like a treat than a traditional bar? D8 Bark turns Medjool dates into a layered chocolate bark sheet with your choice of spread, crunch and finish.</p>
+          <p>It works as a coffee snack, afternoon snack, gym bag treat or shareable dessert. We make each order in Dubai and confirm UAE delivery based on your location and requested date.</p>
+          <div class="seo-links"><a href="date-bark-dubai/">Date Bark Dubai guide</a><a href="healthy-snacks-dubai/">Healthy snack ideas Dubai</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section" id="faq" aria-labelledby="faq-title">
+      <div class="section-shell faq-layout">
+        <div><div class="eyebrow green">FAQ</div><h2 id="faq-title">THE BARK BASICS.</h2></div>
+        <div class="faq-list">
+          <details open><summary>What exactly is date bark?</summary><p>Date bark is a layered snack made with pressed dates, spread, chocolate and toppings. We make it as a full sheet so you can snap it into pieces.</p></details>
+          <details><summary>Can I really build my own?</summary><p>Yes. Choose one spread, one chocolate, up to two crunch options and one finish. Send the build as a request and we will confirm ingredients, price and delivery.</p></details>
+          <details><summary>How big is a sheet?</summary><p>Our launch format is a shareable bark sheet packed flat in a shallow box. Exact finished weight can vary slightly because each sheet is made in small batches.</p></details>
+          <details><summary>Do you deliver across the UAE?</summary><p>D8 is made in Dubai. Dubai delivery is available by request. Other UAE locations are confirmed individually based on courier timing and temperature handling.</p></details>
+          <details><summary>How should I store it?</summary><p>Keep it chilled in its sealed pack. UAE heat can soften chocolate quickly, so refrigerate your bark after delivery and only take out what you plan to enjoy.</p></details>
+          <details><summary>What about allergens?</summary><p>D8 recipes can contain nuts, peanuts, sesame, milk and other allergens. Customizing a build does not make it allergen free. Always tell us about any allergy before ordering.</p></details>
+          <details><summary>Do you take event or office orders?</summary><p>Yes. Use the order request and add the number of sheets, date and event details. We can quote larger small batch orders separately.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="section-shell cta-inner">
+        <div><div class="eyebrow light">READY?</div><h2>BUILD SOMETHING WORTH BREAKING.</h2></div>
+        <a class="button lime" href="#builder">BUILD YOUR BARK <span aria-hidden="true">→</span></a>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div>
-        <div class="brand">
-          <span class="brand-mark">D8</span>
-          <span>D8 Bark</span>
-        </div>
-        <small>Chef-driven date bark from Abu Dhabi. Locally made. Thoughtfully giftable.</small>
-      </div>
-      <div>
-        <small>© 2026 D8 Bark. All rights reserved.</small>
-        <small>Replace placeholder contact details before launch.</small>
-      </div>
+  <footer class="site-footer">
+    <div class="footer-top">
+      <a class="brand footer-brand" href="#top"><span class="brand-d8">D8</span><span class="brand-bark">BARK</span></a>
+      <strong>DATE BARK. BUILT YOUR WAY.</strong>
+      <a href="mailto:orders@d8bark.com">orders@d8bark.com</a>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> D8 Bark. Dubai, UAE.</span>
+      <nav aria-label="Footer navigation"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="#faq">FAQ</a></nav>
     </div>
   </footer>
 
-  <script>
-    const SETTINGS = {
-      whatsappNumber: "971545050266", // Replace with actual number, no + or spaces
-      email: "jessica.queitsch@gmail.com"
-    };
+  <dialog class="order-dialog" id="order-dialog" aria-labelledby="order-title">
+    <form method="dialog" class="dialog-close-row"><button class="dialog-close" value="cancel" aria-label="Close order request">×</button></form>
+    <div class="order-dialog-inner">
+      <div class="eyebrow green">SMALL BATCH ORDER REQUEST</div>
+      <h2 id="order-title">REQUEST YOUR D8</h2>
+      <p class="dialog-intro">This sends a request, not a final paid order. Custom bark starts at AED 72 per sheet. We confirm ingredient availability, total and delivery before making your bark.</p>
 
-    function getFormMessage() {
-      const name = document.getElementById("name").value || "";
-      const phone = document.getElementById("phone").value || "";
-      const orderType = document.getElementById("orderType").value || "";
-      const location = document.getElementById("location").value || "";
-      const quantity = document.getElementById("quantity").value || "";
-      const timing = document.getElementById("timing").value || "";
-      const notes = document.getElementById("notes").value || "";
+      <div class="request-summary" id="request-summary"></div>
 
-      return `Hello D8 Bark!%0A%0AI'm interested in placing an order.%0A%0AName: ${encodeURIComponent(name)}%0APhone: ${encodeURIComponent(phone)}%0AOrder type: ${encodeURIComponent(orderType)}%0ALocation: ${encodeURIComponent(location)}%0AEstimated quantity: ${encodeURIComponent(quantity)}%0ANeeded by: ${encodeURIComponent(timing)}%0ADetails: ${encodeURIComponent(notes)}`;
-    }
+      <form id="order-form">
+        <div class="form-grid">
+          <label>Full name<input required name="name" autocomplete="name" placeholder="Your name"></label>
+          <label>Phone / WhatsApp<input required name="phone" autocomplete="tel" placeholder="+971 ..."></label>
+          <label>Email<input required type="email" name="email" autocomplete="email" placeholder="you@example.com"></label>
+          <label>Delivery area<input required name="area" placeholder="Dubai Marina, Jumeirah, Abu Dhabi..."></label>
+          <label>Quantity<select name="quantity"><option>1 sheet</option><option>2 sheets</option><option>3 sheets</option><option>4 sheets</option><option>5+ sheets</option></select></label>
+          <label>Preferred delivery date<input type="date" name="date"></label>
+        </div>
+        <label>Notes<textarea name="notes" rows="3" placeholder="Gift note, event order, timing, access instructions, allergies to flag..."></textarea></label>
+        <label class="consent"><input required type="checkbox" name="consent"><span>I understand this is an order request and D8 will confirm availability and final total before production.</span></label>
+        <button class="button primary full" type="submit">SEND ORDER REQUEST <span aria-hidden="true">→</span></button>
+        <button class="button outline full" type="button" id="copy-order">COPY ORDER DETAILS</button>
+        <p class="form-note">Your request will open in your email app ready to send. We confirm availability, final total and delivery before production.</p>
+      </form>
+    </div>
+  </dialog>
 
-    function sendWhatsApp() {
-      const url = `https://wa.me/${SETTINGS.whatsappNumber}?text=${getFormMessage()}`;
-      window.open(url, "_blank");
-    }
-  </script>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
